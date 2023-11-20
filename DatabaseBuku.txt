@@ -1,0 +1,27 @@
+1. Buku
+IDB : integer (PK)
+JudulBuku : string
+Pengarang : string
+Kategori : string
+Penerbit : string
+Tahun : date
+
+2. Anggota
+IDanggota : integer (PK)
+Nama : string
+Jurusan : string
+MasaBerlaku : date
+
+3. Petugas
+Nama : string
+Username : string (PK)
+Password : text
+isAdmin: boolean
+
+4. Peminjaman
+kode_peminjaman : integer (PK), auto incre
+judul_buku : string
+tgl_pinjam : date
+tgl_kembali : date
+nomor_buku: integer (FK)
+nomor_anggota : integer (FK)
