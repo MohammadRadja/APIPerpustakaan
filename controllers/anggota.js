@@ -14,11 +14,10 @@ const index = async (req, res) => {
 //Membuat Data
 const store = async (req, res) => {
     //Mendapatkan Request Body
-    const { IDAnggota, Nama,Jurusan,MasaBerlaku } = req.body;
+    const { Nama,Jurusan,MasaBerlaku } = req.body;
     try {
         //Menambahkan Data Baru
         const Anggota = await anggota.create({
-            IDAnggota: IDAnggota,
             Nama: Nama,
             Jurusan: Jurusan,
             MasaBerlaku: MasaBerlaku
@@ -35,15 +34,14 @@ const update = async (req, res) => {
     const { IDAnggota, Nama,Jurusan,MasaBerlaku } = req.body;
     try {
         //Mendapatkan req.params
-        const { IDAnggota } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const Anggota = await anggota.findByPk(IDAnggota);
+        const Anggota = await anggota.findByPk(id);
         //Kondisi Data Jika tidak ditemukan
         if (!Anggota) {
             return res.status(404).json({ message: "Anggota tidak ditemukan" });
         }
         //Mengupdate Data
-        Anggota.IDAnggota = IDAnggota || Anggota.IDAnggota;
         Anggota.Nama = Nama || Anggota.Nama;
         Anggota.Jurusan = Jurusan || Anggota.Jurusan;
         Anggota.MasaBerlaku = MasaBerlaku || Anggota.MasaBerlaku;
@@ -60,9 +58,9 @@ const update = async (req, res) => {
 const show = async (req, res) => {
     try {
         //Mendapatkan req.params
-        const { IDAnggota } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const Anggota = await anggota.findByPk(IDAnggota);
+        const Anggota = await anggota.findByPk(id);
         //Kondisi Data Jika Tidak Ditemukan
         if (!Anggota) {
             return res.status(404).json({ message: "Anggota tidak ditemukan" });
@@ -77,9 +75,9 @@ const show = async (req, res) => {
 const remove = async (req, res) => {
     try {
         //Mendapatkan req.params
-        const { IDAnggota } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const Anggota= await anggota.findByPk(IDAnggota);
+        const Anggota= await anggota.findByPk(id);
         //Kondisi Data Jika Tidak Ditemukan
         if (!Anggota) {
             return res.status(404).json({ message: "Anggota tidak ditemukan" });
@@ -88,7 +86,7 @@ const remove = async (req, res) => {
         Anggota.destroy();
         //Mengembalikan Response ke Client
         res.status(200).json({
-            message: `Anggota dengan ID ${Anggota.IDAnggota} dan Nama ${Anggota.Nama} berhasil dihapus`,
+            message: `Anggota dengan ID ${Anggota.id} dan Nama ${Anggota.Nama} berhasil dihapus`,
         });
     } catch (error) {
         console.log(error);

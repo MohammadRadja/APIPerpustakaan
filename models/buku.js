@@ -11,17 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       buku.hasMany(models.peminjaman,{
-        as:"peminjaman",
-        foreignKey:"IDBuku",
-        onDelete: "CASCADE"
+        as:"peminjamans",
+        foreignKey:"IDBuku"
       });
     }
   }
   buku.init({
-    IDBuku: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
     JudulBuku: {
       allowNull: false,
       type: DataTypes.STRING

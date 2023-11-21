@@ -34,6 +34,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     },
+    IDBuku: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
+    IDAnggota: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
   }, {
     sequelize,
     modelName: 'peminjaman',

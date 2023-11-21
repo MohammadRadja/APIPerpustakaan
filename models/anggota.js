@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   anggota.init({
-    IDAnggota: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
     Nama: {
       allowNull: false,
       type: DataTypes.STRING

@@ -1,7 +1,7 @@
 const { json } = require("sequelize");
 const { buku } = require("../models");
 
-//Mendapatkan Semua Data
+//Get All Data
 const index = async (req, res) => {
     try {
         const bukus = await buku.findAll();
@@ -11,14 +11,13 @@ const index = async (req, res) => {
     }
 };
 
-//Membuat Data
+//Create Data
 const store = async (req, res) => {
-    //Mendapatkan Request Body
-    const { IDBuku, JudulBuku,Pengarang,Kategori,Penerbit,Tahun } = req.body;
+    //Get Request Body
+    const { JudulBuku,Pengarang,Kategori,Penerbit,Tahun } = req.body;
     try {
         //Menambahkan Data Baru
         const bukus = await buku.create({
-            IDBuku: IDBuku,
             JudulBuku: JudulBuku,
             Pengarang: Pengarang,
             Kategori: Kategori,
@@ -26,7 +25,7 @@ const store = async (req, res) => {
             Tahun: Tahun
         });
         //Mengembalikan Response ke Client
-        res.status(201).json(buku);
+        res.status(201).json(bukus);
     } catch (error) {
         console.log(error);
     }
@@ -37,9 +36,9 @@ const update = async (req, res) => {
     const { JudulBuku,Pengarang,Kategori,Penerbit,Tahun } = req.body;
     try {
         //Mendapatkan req.params
-        const { IDBuku } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const bukus = await buku.findByPk(IDBuku);
+        const bukus = await buku.findByPk(id);
         //Kondisi Data Jika tidak ditemukan
         if (!bukus) {
             return res.status(404).json({ message: "Buku tidak ditemukan" });
@@ -51,7 +50,7 @@ const update = async (req, res) => {
         bukus.Penerbit = Penerbit || bukus.Penerbit;
         bukus.Tahun = Tahun || bukus.Tahun;
         //Menyimpan data
-        bukus.save();
+        await bukus.save();
         //Mengembalikan Response ke Client
         res.status(200).json(bukus);
     } catch (error) {
@@ -63,9 +62,9 @@ const update = async (req, res) => {
 const show = async (req, res) => {
     try {
         //Mendapatkan req.params
-        const { IDBuku } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const bukus = await buku.findByPk(IDBuku);
+        const bukus = await buku.findByPk(id);
         //Kondisi Data Jika Tidak Ditemukan
         if (!bukus) {
             return res.status(404).json({ message: "Buku tidak ditemukan" });
@@ -80,15 +79,15 @@ const show = async (req, res) => {
 const remove = async (req, res) => {
     try {
         //Mendapatkan req.params
-        const { IDBuku } = req.params;
+        const { id } = req.params;
         //Mencari Data Berdasarkan ID
-        const bukus = await buku.findByPk(IDBuku);
+        const bukus = await buku.findByPk(id);
         //Kondisi Data Jika Tidak Ditemukan
         if (!bukus) {
             return res.status(404).json({ message: "Buku tidak ditemukan" });
         }
         //Menghapus Data
-        bukus.destroy();
+        await bukus.destroy();
         //Mengembalikan Response ke Client
         res.status(200).json({
             message: `Buku dengan ID ${bukus.IDBuku} dan Judul ${bukus.JudulBuku} berhasil dihapus`,

@@ -18,6 +18,26 @@ module.exports = {
       TanggalKembali: {
         type: Sequelize.DATE
       },
+      IDBuku: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "buku",
+          key : "id"
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
+        IDAnggota: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+          references: {
+            model: "anggota",
+            key : "id"
+          },
+          onDelete: 'CASCADE',
+          onUpdate: 'CASCADE'
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

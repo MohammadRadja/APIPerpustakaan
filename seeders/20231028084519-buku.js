@@ -4,7 +4,6 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('buku', [{
-      "IDBuku": 111,
       "JudulBuku": "Rekayasa Perangkat Lunak",
       "Pengarang": "Mohammad Radja",
       "Kategori": "Buku Pengetahuan Teknologi",

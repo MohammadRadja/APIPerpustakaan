@@ -7,6 +7,8 @@ module.exports = {
       "JudulBuku": "Rekayasa Perangkat Lunak",
       "TanggalPinjam": "2023-09-28",
       "TanggalKembali": "2023-12-28",
+      "IDBuku": 1,
+      "IDAnggota": 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

@@ -6,11 +6,11 @@ const index = async (req, res) => {
             include: [
                 {
                     model: buku,
-                    as: "bukus", // Gunakan alias yang sesuai
+                    as: "buku", // Gunakan alias yang sesuai
                 },
                 {
                     model: anggota,
-                    as: "Anggota", // Gunakan alias yang sesuai
+                    as: "anggota", // Gunakan alias yang sesuai
                 },
             ],
         });
@@ -61,8 +61,8 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        const {IDPeminjaman } = req.params;
-        const Peminjaman = await peminjaman.findByPk(IDPeminjaman);
+        const { id } = req.params;
+        const Peminjaman = await peminjaman.findByPk(id);
         if (!Peminjaman) {
             return res.status(404).json({ message: "Peminjaman not found" });
         }
@@ -70,7 +70,7 @@ const remove = async (req, res) => {
         await Peminjaman.destroy();
         return res
             .status(200)
-            .json({ message: `Peminjaman denganID ${Peminjaman.IDPeminjaman} telah dihapus` });
+            .json({ message: `Peminjaman denganID ${Peminjaman.id} telah dihapus` });
     } catch (error) {
         console.log(`Error: ${error}`);
     }
